@@ -1,0 +1,55 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+}
+
+html, body {
+  background-color: lightgray;
+}
+
+.container {
+  background-color: #496b8d;
+ /* height: 320px;*/
+  border-radius: 20px;
+  margin-top: 60px;
+}
+
+img {
+  width: 300px;
+  float: left;
+  padding: 20px;
+  margin-left: 80px;
+}
+
+.logo-text {
+  display: inline-block;
+  padding: 10px 0px;
+  font-size: 3.7rem;
+  font-weight: 300;
+}
+
+.form-group {
+  clear: both;
+  margin-top: 20px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+label {
+  font-size: 2rem;
+  padding-bottom: 10px;
+}
+
+.btn {
+  background-color: #ff3100;
+  border: none;
+  padding: 4px 10px;
+  margin: 20px 0px;
+
+}
+
+
+
