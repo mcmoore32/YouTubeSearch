@@ -12,10 +12,11 @@ html, body {
 
 .container {
   background-color: #496b8d;
- /* height: 320px;*/
   border-radius: 20px;
   margin-top: 60px;
 }
+
+/*YouTube logo*/
 
 img {
   width: 300px;
@@ -48,8 +49,37 @@ label {
   border: none;
   padding: 4px 10px;
   margin: 20px 0px;
-
 }
+
+.results-div {
+  clear: both;
+  margin-bottom: 0px;
+  margin-left: 100px;
+}
+
+/*Thumbnail formatting*/
+
+.tnail {
+  padding: 0 20px 0px 0;
+  margin: 0;
+  height: 100%;
+}
+
+/*Results word that appears at top of results*/
+
+h2 {
+  margin: 20px 0px 40px 50px;
+}
+
+/*Titles that appear next to thumbnails*/
+
+h3 {
+  font-size: 1.5rem;
+  width: 60%;
+  display: inline-block;
+  height: 180px;
+}
+
 
 
 

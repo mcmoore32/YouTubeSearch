@@ -8,70 +8,68 @@
 //"https://www.googleapis.com/youtube/v3/search"
 
 
+//Endpoint URL
+var YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
-
-var GITHUB_SEARCH_URL = 'https://api.github.com/search/repositories';
-
-
+//HTML template to be added dynamically to show results
 var RESULT_HTML_TEMPLATE = (
-  '<div>' +
-    '<h2>' +
-    '<a class="js-result-name" href="" target="_blank"></a> by <a class="js-user-name" href="" target="_blank"></a></h2>' +
-    '<p>Number of watchers: <span class="js-watchers-count"></span></p>' +
-    '<p>Number of open issues: <span class="js-issues-count"></span></p>' +
-  '</div>'
+  '<div class="results-div">' +
+  '<div class="img-container"><img class="tnail js-thumbnail" src="" alt=""></div>' +
+  '<h3 class="js-title"></h3></div>'
 );
 
+//get JSON data using search term
 function getDataFromApi(searchTerm, callback) {
   console.log('getDataFromApi');
   var query = {
-    q: searchTerm + " in:name",
-    per_page: 5
+    part: 'snippet',
+    key: 'AIzaSyBR55y-MSJ3gmcx9oHNffilb_CX6vcW01Q',
+    q: searchTerm + 'in:name',
+    per_page: 10
   }
-  $.getJSON(GITHUB_SEARCH_URL, query, callback);
+  $.getJSON(YOUTUBE_SEARCH_URL, query, callback);
 }
 
-/*function getDataFromApi(searchTerm, callback) {
-  var settings = {
-    url: GITHUB_SEARCH_URL,
-    data: {
-      q: searchTerm + " in:name",
-      per_page: 5
-    },
-    dataType: 'json',
-    type: 'GET',
-    success: callback
-  };
-  $.ajax(settings);
-}*/
+/*  console logs of returned JSON data (substitute for "callback);}" above)
 
+            function(returnedText) {
+    console.log(returnedText);
+    var jsonText = returnedText;
+    console.log(jsonText);   console.log(jsonText.items[0].snippet.thumbnails.medium.url);
+    console.log(jsonText.items[0].snippet.title);
+  });
+}
+
+*/
+
+//Adds returned results to HTML template
 function renderResult(result) {
   $('.js-results-header').text("Results");
   var template = $(RESULT_HTML_TEMPLATE);
-  template.find(".js-result-name").text(result.name).attr("href", result.html_url);
-  template.find(".js-user-name").text(result.owner.login).attr("href", result.owner.html_url);
-  template.find(".js-watchers-count").text(result.watchers_count);
-  template.find(".js-issues-count").text(result.open_issues);
+  template.find('.js-thumbnail').attr("src", result.snippet.thumbnails.medium.url);
+  template.find(".js-title").text(result.snippet.title);
   return template;
 }
 
-function displayGitHubSearchData(data) {
+//Adds the complete HTML template to the DOM so it is displayed
+function displayYouTubeSearchData(data) {
   var results = data.items.map(function(item, index) {
     return renderResult(item);
   });
   $('.js-search-results').html(results);
 }
 
+//Event listener for submit, gets user search term and assigns it to variable
 function watchSubmit() {
-  console.log('Watchsubmit Go');
   $('.js-search-form').submit(function(event) {
     event.preventDefault();
     var queryTarget = $(event.currentTarget).find('.js-query');
     var query = queryTarget.val();
     // clear out the input
     queryTarget.val("");
-    getDataFromApi(query, displayGitHubSearchData);
+    getDataFromApi(query, displayYouTubeSearchData);
   });
 }
 
 $(watchSubmit);
+
